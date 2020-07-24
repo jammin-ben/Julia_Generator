@@ -7,6 +7,8 @@ onready var num_iter = float(self.material.get_shader_param("num_iter"))
 var iter_speed = 12 #iter changes per second
 var iter_accel = 0
 
+signal c_changed(c)
+
 func _process(delta):
 	var iter_delta = Input.get_action_strength("iterup") - Input.get_action_strength("iterdown")
 	if iter_delta != 0:
@@ -23,3 +25,4 @@ func _process(delta):
 		c.x += lr * SPEED * delta
 		c.y += ud * SPEED * delta
 		self.material.set_shader_param("c",c)
+		emit_signal("c_changed",c)

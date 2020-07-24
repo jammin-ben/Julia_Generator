@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform int num_iter=20;
+uniform int num_iter=10;
 uniform vec2 c=vec2(-.8,.25);
 uniform float scale = 3.0;
 uniform vec4 col1 = vec4(1.,0.7,.7,1.);
