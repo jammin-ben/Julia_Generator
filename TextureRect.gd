@@ -26,3 +26,11 @@ func _process(delta):
 		c.y += ud * SPEED * delta
 		self.material.set_shader_param("c",c)
 		emit_signal("c_changed",c)
+	
+	
+
+func _on_ColorPicker_color_changed(color):
+	self.material.set_shader_param("r",color.r)
+	
+	self.material.set_shader_param("g",color.g)
+	self.material.set_shader_param("b",color.b)

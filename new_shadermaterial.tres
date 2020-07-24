@@ -7,6 +7,8 @@ shader = ExtResource( 1 )
 shader_param/num_iter = 10
 shader_param/c = Vector2( -0.8, 0.25 )
 shader_param/scale = 3.0
-shader_param/col1 = Plane( 0, 0.9, 0.7, 1 )
 shader_param/col2 = Plane( 0, 0, 0.1, 1 )
+shader_param/r = 0.1
+shader_param/g = 0.9
+shader_param/b = 0.7
 

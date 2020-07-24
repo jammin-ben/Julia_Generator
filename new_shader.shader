@@ -3,8 +3,13 @@ shader_type canvas_item;
 uniform int num_iter=10;
 uniform vec2 c=vec2(-.8,.25);
 uniform float scale = 3.0;
-uniform vec4 col1 = vec4(1.,0.7,.7,1.);
+//uniform vec4 col1 = vec4(1.,0.7,.7,1.);
 uniform vec4 col2 = vec4(.2,0.,0.,1.);
+uniform float r = .1;
+uniform float g = 0.9;
+uniform float b = 0.7;
+
+
 
 vec2 squared(vec2 vec){
 	return vec2(vec.x*vec.x -vec.y*vec.y, 2.0*vec.x*vec.y);
@@ -15,6 +20,7 @@ float modulus(vec2 vec){
 }
 
 void fragment() {
+	vec4 col1 = vec4(r,g,b,1.);
 	vec2 z = vec2((UV.x - .5) * scale, (UV.y - .5) * scale);
 	float intensity = 1.0;
 
