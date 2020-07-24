@@ -13,6 +13,7 @@ func _process(delta):
 	var iter_delta = Input.get_action_strength("iterup") - Input.get_action_strength("iterdown")
 	if iter_delta != 0:
 		num_iter += (iter_speed + iter_accel) * delta * iter_delta
+		num_iter = max(num_iter,0)
 		self.material.set_shader_param("num_iter",num_iter)
 		iter_accel += 3*delta
 		iter_accel = min(iter_accel,MAX_ITER_ACCEL)
