@@ -92,20 +92,32 @@ custom_constants/margin_bottom = 20
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 203.0
-margin_bottom = 84.0
+margin_right = 310.0
+margin_bottom = 108.0
 
-[node name="Mandelboi" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 113.0
+margin_bottom = 88.0
+
+[node name="MandelButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 113.0
+margin_bottom = 20.0
+toggle_mode = true
+text = "Toggle Minimap"
+
+[node name="Mandelboi" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 material = SubResource( 2 )
-margin_right = 64.0
-margin_bottom = 64.0
+margin_top = 24.0
+margin_right = 113.0
+margin_bottom = 137.0
 texture = ExtResource( 3 )
+stretch_mode = 1
 script = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-margin_left = 68.0
-margin_right = 164.0
-margin_bottom = 64.0
+margin_left = 117.0
+margin_right = 213.0
+margin_bottom = 88.0
 
 [node name="MenuButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 margin_right = 96.0
@@ -127,9 +139,11 @@ margin_left = 122.0
 margin_top = -14.0
 margin_right = 412.0
 margin_bottom = 448.0
+color = Color( 0.0980392, 0.901961, 0.705882, 1 )
 script = ExtResource( 8 )
 
-[connection signal="c_changed" from="Juliaboi" to="MarginContainer/HBoxContainer/Mandelboi" method="_on_Juliaboi_c_changed"]
+[connection signal="c_changed" from="Juliaboi" to="MarginContainer/HBoxContainer/VBoxContainer2/Mandelboi" method="_on_Juliaboi_c_changed"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer2/MandelButton" to="MarginContainer/HBoxContainer/VBoxContainer2/Mandelboi" method="_on_MandelButton_toggled"]
 [connection signal="button_up" from="MarginContainer/HBoxContainer/VBoxContainer/MenuButton" to="MarginContainer/HBoxContainer/VBoxContainer/ColorPicker" method="_on_MenuButton_button_up"]
 [connection signal="button_up" from="MarginContainer/HBoxContainer/VBoxContainer/MenuButton" to="MarginContainer/HBoxContainer/VBoxContainer/MenuButton" method="_on_MenuButton_button_up"]
 [connection signal="button_up" from="MarginContainer/HBoxContainer/VBoxContainer/MenuButton" to="MarginContainer/HBoxContainer/VBoxContainer/ExitColorButton" method="_on_MenuButton_button_up"]
