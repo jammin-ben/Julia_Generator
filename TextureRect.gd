@@ -8,6 +8,7 @@ var iter_speed = 12 #iter changes per second
 var iter_accel = 0
 var camera_zoom = 1
 signal c_changed(c)
+signal hide_ui()
 
 func _process(delta):
 	var iter_delta = Input.get_action_strength("iterup") - Input.get_action_strength("iterdown")
@@ -30,7 +31,8 @@ func _process(delta):
 		self.material.set_shader_param("c",c)
 		emit_signal("c_changed",c)
 	
-	
+	if Input.is_action_just_pressed("hide_ui"):
+		emit_signal("hide_ui")
 
 func _on_ColorPicker_color_changed(color):
 	self.material.set_shader_param("r",color.r)
