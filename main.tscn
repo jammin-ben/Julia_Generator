@@ -88,32 +88,34 @@ script = ExtResource( 2 )
 [node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/UI"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 233.0
-margin_bottom = 108.0
+margin_right = 237.0
+margin_bottom = 157.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Camera2D/CanvasLayer/UI/HBoxContainer"]
-margin_right = 113.0
-margin_bottom = 88.0
+margin_right = 117.0
+margin_bottom = 137.0
 
 [node name="MandelButton" type="Button" parent="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2"]
-margin_right = 113.0
+margin_right = 117.0
 margin_bottom = 20.0
 toggle_mode = true
-text = "Toggle Minimap"
+text = "Toggle Navigator"
 
 [node name="Mandelboi" type="TextureRect" parent="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2"]
 material = SubResource( 2 )
 margin_top = 24.0
-margin_right = 113.0
-margin_bottom = 88.0
+margin_right = 117.0
+margin_bottom = 137.0
+rect_min_size = Vector2( 113, 113 )
+size_flags_vertical = 2
 texture = ExtResource( 3 )
-stretch_mode = 1
+stretch_mode = 6
 script = ExtResource( 4 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer/UI/HBoxContainer"]
-margin_left = 117.0
-margin_right = 213.0
-margin_bottom = 88.0
+margin_left = 121.0
+margin_right = 217.0
+margin_bottom = 137.0
 
 [node name="MenuButton" type="Button" parent="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer"]
 margin_right = 96.0
@@ -141,9 +143,9 @@ script = ExtResource( 7 )
 [node name="Juliaboi" type="TextureRect" parent="."]
 material = ExtResource( 8 )
 margin_left = 2.98206
-margin_top = 2.01013
+margin_top = 1.46977
 margin_right = 603.074
-margin_bottom = 601.237
+margin_bottom = 600.697
 texture = ExtResource( 3 )
 stretch_mode = 1
 script = ExtResource( 9 )
