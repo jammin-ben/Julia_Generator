@@ -142,6 +142,7 @@ margin_bottom = 448.0
 color = Color( 0.0980392, 0.901961, 0.705882, 1 )
 script = ExtResource( 8 )
 
+[connection signal="zoom_changed" from="Camera2D" to="Juliaboi" method="_on_Camera2D_zoom_changed"]
 [connection signal="c_changed" from="Juliaboi" to="MarginContainer/HBoxContainer/VBoxContainer2/Mandelboi" method="_on_Juliaboi_c_changed"]
 [connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer2/MandelButton" to="MarginContainer/HBoxContainer/VBoxContainer2/Mandelboi" method="_on_MandelButton_toggled"]
 [connection signal="button_up" from="MarginContainer/HBoxContainer/VBoxContainer/MenuButton" to="MarginContainer/HBoxContainer/VBoxContainer/ColorPicker" method="_on_MenuButton_button_up"]
