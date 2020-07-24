@@ -2,3 +2,5 @@
 *~
 .import/
 logs/
+html_export/
+*.zip
