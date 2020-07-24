@@ -27,9 +27,8 @@ float modulus(vec2 vec){
 	return sqrt(vec.x*vec.x + vec.y*vec.y);
 }
 
-
 void fragment() {
-	vec2 z_0 = vec2((UV.x - .5) * scale, (UV.y - .5) * scale);
+	vec2 z_0 = vec2((UV.x - .5) * scale -1., (UV.y - .5) * scale);
 	vec2 z;
 	float intensity = 1.0;
 	float tolerance = .03;
@@ -48,7 +47,7 @@ void fragment() {
 		COLOR= vec4(0.0,0.0,0.0,1.0);
 		
 	//Draw Major Axes
-	if((.495 < UV.x) && (UV.x < .505) || (.495 < UV.y ) && (UV.y < .505))
+	if((.495 + 1./scale < UV.x) && (UV.x < .505 +1. / scale) || (.495 < UV.y ) && (UV.y < .505))
 		COLOR = vec4(1.0,1.0,1.0,1.0); 
 	
 	//Draw c crosshairs
@@ -133,10 +132,10 @@ script = ExtResource( 6 )
 
 [node name="ColorPicker" type="ColorPicker" parent="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer"]
 visible = false
-margin_left = 122.0
-margin_top = -14.0
-margin_right = 412.0
-margin_bottom = 448.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 4.0
+margin_bottom = 4.0
 color = Color( 0.0980392, 0.901961, 0.705882, 1 )
 script = ExtResource( 7 )
 
@@ -153,11 +152,11 @@ script = ExtResource( 9 )
 [connection signal="zoom_changed" from="Camera2D" to="Juliaboi" method="_on_Camera2D_zoom_changed"]
 [connection signal="toggled" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/MandelButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/Mandelboi" method="_on_MandelButton_toggled"]
 [connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ColorPicker" method="_on_MenuButton_button_up"]
-[connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" method="_on_MenuButton_button_up"]
 [connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" method="_on_MenuButton_button_up"]
+[connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" method="_on_MenuButton_button_up"]
 [connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ColorPicker" method="_on_ExitColorButton_button_up"]
-[connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" method="_on_ExitColorButton_button_up"]
 [connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" method="_on_ExitColorButton_button_up"]
+[connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" method="_on_ExitColorButton_button_up"]
 [connection signal="color_changed" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ColorPicker" to="Juliaboi" method="_on_ColorPicker_color_changed"]
 [connection signal="c_changed" from="Juliaboi" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/Mandelboi" method="_on_Juliaboi_c_changed"]
 [connection signal="hide_ui" from="Juliaboi" to="Camera2D/CanvasLayer/UI" method="_on_Juliaboi_hide_ui"]
