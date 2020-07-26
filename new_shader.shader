@@ -25,7 +25,7 @@ void fragment() {
 	float intensity = 1.0;
 
 	for(int i=0;i<num_iter;i++){
-		z = squared(z)+ c;
+		z = squared(squared(z))+ c;
 		if(modulus(z)>=2.0){
 			intensity = float(i) / float(num_iter);
 			//COLOR.g = float(i) / float(num_iter);
