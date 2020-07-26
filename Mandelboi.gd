@@ -16,5 +16,5 @@ func _ready():
 func _on_Juliaboi_c_changed(c):
 	self.material.set_shader_param("c",c)
 
-func _on_MandelButton_toggled(button_pressed):
+func _on_MandelButton_button_up():
 	self.visible = not self.visible

@@ -11,10 +11,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(Input.is_action_pressed("ui_accept")):
+	if(Input.is_action_pressed("zoom_in")):
 		self.zoom *= .97 
 		emit_signal("zoom_changed",self.zoom)
-	if Input.is_action_pressed("ui_cancel"):	
+	if Input.is_action_pressed("zoom_out"):	
 		self.zoom *= 1.025
 		emit_signal("zoom_changed",self.zoom)
 		

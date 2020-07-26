@@ -1,6 +1,6 @@
 extends TextureRect
 const SPEED = .1
-const MAX_ITER_ACCEL = 50
+const MAX_ITER_ACCEL = 110
 
 onready var num_iter = float(self.material.get_shader_param("num_iter"))
 
@@ -16,7 +16,7 @@ func _process(delta):
 		num_iter += (iter_speed + iter_accel) * delta * iter_delta
 		num_iter = max(num_iter,0)
 		self.material.set_shader_param("num_iter",num_iter)
-		iter_accel += 3*delta
+		iter_accel += 6*delta
 		iter_accel = min(iter_accel,MAX_ITER_ACCEL)
 	else:
 		iter_accel = 0

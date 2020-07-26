@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://UI.gd" type="Script" id=2]
@@ -7,8 +7,9 @@
 [ext_resource path="res://MenuButton.gd" type="Script" id=5]
 [ext_resource path="res://ExitColorButton.gd" type="Script" id=6]
 [ext_resource path="res://ColorPicker.gd" type="Script" id=7]
-[ext_resource path="res://new_shadermaterial.tres" type="Material" id=8]
-[ext_resource path="res://TextureRect.gd" type="Script" id=9]
+[ext_resource path="res://Panel.gd" type="Script" id=8]
+[ext_resource path="res://new_shadermaterial.tres" type="Material" id=9]
+[ext_resource path="res://TextureRect.gd" type="Script" id=10]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -87,7 +88,7 @@ script = ExtResource( 2 )
 [node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/UI"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 237.0
+margin_right = 343.0
 margin_bottom = 157.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Camera2D/CanvasLayer/UI/HBoxContainer"]
@@ -139,17 +140,51 @@ margin_bottom = 4.0
 color = Color( 0.0980392, 0.901961, 0.705882, 1 )
 script = ExtResource( 7 )
 
+[node name="VBoxContainer3" type="VBoxContainer" parent="Camera2D/CanvasLayer/UI/HBoxContainer"]
+margin_left = 221.0
+margin_right = 323.0
+margin_bottom = 137.0
+
+[node name="ToggleControls" type="Button" parent="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer3"]
+margin_right = 102.0
+margin_bottom = 20.0
+toggle_mode = true
+text = "Show Controls"
+
+[node name="Panel" type="Panel" parent="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer3"]
+visible = false
+margin_top = 24.0
+margin_right = 102.0
+margin_bottom = 24.0
+script = ExtResource( 8 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer3/Panel"]
+anchor_right = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 205.0
+margin_bottom = 200.0
+text = "Controls
+WASD : Change c value
+IK  : Change Draw Depth
+Arrow Keys: Pan Camera
++- : Zoom In/Out
+H: Hide / Show UI
+"
+
 [node name="Juliaboi" type="TextureRect" parent="."]
-material = ExtResource( 8 )
+material = ExtResource( 9 )
 margin_left = 2.98206
 margin_top = 1.46977
 margin_right = 603.074
 margin_bottom = 600.697
 texture = ExtResource( 3 )
 stretch_mode = 1
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
 [connection signal="zoom_changed" from="Camera2D" to="Juliaboi" method="_on_Camera2D_zoom_changed"]
+[connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/MandelButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/Mandelboi" method="_on_MandelButton_button_up"]
+[connection signal="pressed" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/MandelButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/Mandelboi" method="_on_MandelButton_pressed"]
 [connection signal="toggled" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/MandelButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/Mandelboi" method="_on_MandelButton_toggled"]
 [connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ColorPicker" method="_on_MenuButton_button_up"]
 [connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" method="_on_MenuButton_button_up"]
@@ -158,5 +193,6 @@ script = ExtResource( 9 )
 [connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" method="_on_ExitColorButton_button_up"]
 [connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" method="_on_ExitColorButton_button_up"]
 [connection signal="color_changed" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ColorPicker" to="Juliaboi" method="_on_ColorPicker_color_changed"]
+[connection signal="pressed" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer3/ToggleControls" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer3/Panel" method="_on_ToggleControls_pressed"]
 [connection signal="c_changed" from="Juliaboi" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/Mandelboi" method="_on_Juliaboi_c_changed"]
 [connection signal="hide_ui" from="Juliaboi" to="Camera2D/CanvasLayer/UI" method="_on_Juliaboi_hide_ui"]
