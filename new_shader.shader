@@ -5,7 +5,7 @@ uniform int pwr = 2;
 uniform vec2 c=vec2(-.8,.25);
 uniform float scale = 3.0;
 //uniform vec4 col1 = vec4(1.,0.7,.7,1.);
-uniform vec4 col2 = vec4(.2,0.,0.,1.);
+uniform vec4 col2 = vec4(0.,0.,0.1,1.);
 uniform float r = .1;
 uniform float g = 0.9;
 uniform float b = 0.7;
@@ -31,7 +31,9 @@ float modulus(vec2 vec){
 
 void fragment() {
 	vec4 col1 = vec4(r,g,b,1.);
-	vec2 z = vec2((UV.x - .5) * scale, (UV.y - .5) * scale);
+	//vec2 z = vec2((UV.x - .5) * scale, (UV.y - .5) * scale);
+	vec2 z = vec2((UV.x - .5) * scale, (UV.y - .5) * -1. * scale);
+	
 	float intensity = 1.0;
 
 	for(int i=0;i<num_iter;i++){
