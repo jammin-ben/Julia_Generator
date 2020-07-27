@@ -15,13 +15,21 @@
 code = "shader_type canvas_item;
 
 uniform int num_iter=20;
+uniform int pwr = 2;
 uniform vec2 c=vec2(-.8,.25);
-uniform float scale = 3.0;
+uniform float scale = 4.0;
 uniform vec4 col1 = vec4(1.,0.7,.7,1.);
 uniform vec4 col2 = vec4(.2,0.,0.,1.);
 
 vec2 squared(vec2 vec){
 	return vec2(vec.x*vec.x -vec.y*vec.y, 2.0*vec.x*vec.y);
+}
+vec2 mypow(vec2 vec, int power){
+	vec2 dummy = vec;
+	for(int i=0;i<power - 1;i++){
+		dummy = vec2(dummy.x * vec.x - dummy.y * vec.y,   dummy.x * vec.y + dummy.y * vec.x);
+	}
+	return dummy;
 }
 
 float modulus(vec2 vec){
@@ -29,12 +37,14 @@ float modulus(vec2 vec){
 }
 
 void fragment() {
-	vec2 z_0 = vec2((UV.x - .5) * scale -1., (UV.y - .5) * scale);
+	//vec2 z_0 = vec2((UV.x - .5) * scale, (UV.y - .5) * scale);
+	vec2 z_0 = vec2((UV.x - .5) * scale, (UV.y - .5) * -1. * scale);
+	
 	vec2 z;
 	float intensity = 1.0;
 	float tolerance = .03;
 	for(int i=0;i<num_iter;i++){
-		z = squared(squared(z))+ z_0;
+		z = mypow(z,pwr)+z_0;
 		if(modulus(z)>=2.0){
 			intensity = float(i) / float(num_iter);
 			//COLOR.g = float(i) / float(num_iter);
@@ -48,18 +58,19 @@ void fragment() {
 		COLOR= vec4(0.0,0.0,0.0,1.0);
 		
 	//Draw Major Axes
-	if((.495 + 1./scale < UV.x) && (UV.x < .505 +1. / scale) || (.495 < UV.y ) && (UV.y < .505))
+	if((.495 < UV.x) && (UV.x < .505) || (.495 < UV.y ) && (UV.y < .505))
 		COLOR = vec4(1.0,1.0,1.0,1.0); 
 	
 	//Draw c crosshairs
 	if((abs(c.x - z_0.x) < tolerance) && (abs(c.y - z_0.y) < .2) || 
 	   (abs(c.y - z_0.y) < tolerance) && (abs(c.x - z_0.x) < .2)) 
-		COLOR = vec4(0.,1.,1.0,1.);
+		COLOR = vec4(0.,.7,.9,1.);
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
 shader_param/num_iter = 20
+shader_param/pwr = 2
 shader_param/c = Vector2( -0.8, 0.25 )
 shader_param/scale = 3.0
 shader_param/col1 = Plane( 1, 0.7, 0.7, 1 )
@@ -174,10 +185,8 @@ H: Hide / Show UI
 
 [node name="Juliaboi" type="TextureRect" parent="."]
 material = ExtResource( 9 )
-margin_left = 2.98206
-margin_top = 1.46977
-margin_right = 603.074
-margin_bottom = 600.697
+margin_right = 600.092
+margin_bottom = 599.227
 texture = ExtResource( 3 )
 stretch_mode = 1
 script = ExtResource( 10 )
@@ -187,11 +196,11 @@ script = ExtResource( 10 )
 [connection signal="pressed" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/MandelButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/Mandelboi" method="_on_MandelButton_pressed"]
 [connection signal="toggled" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/MandelButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/Mandelboi" method="_on_MandelButton_toggled"]
 [connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ColorPicker" method="_on_MenuButton_button_up"]
-[connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" method="_on_MenuButton_button_up"]
 [connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" method="_on_MenuButton_button_up"]
+[connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" method="_on_MenuButton_button_up"]
 [connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ColorPicker" method="_on_ExitColorButton_button_up"]
-[connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" method="_on_ExitColorButton_button_up"]
 [connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/MenuButton" method="_on_ExitColorButton_button_up"]
+[connection signal="button_up" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ExitColorButton" method="_on_ExitColorButton_button_up"]
 [connection signal="color_changed" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer/ColorPicker" to="Juliaboi" method="_on_ColorPicker_color_changed"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer3/ToggleControls" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer3/Panel" method="_on_ToggleControls_pressed"]
 [connection signal="c_changed" from="Juliaboi" to="Camera2D/CanvasLayer/UI/HBoxContainer/VBoxContainer2/Mandelboi" method="_on_Juliaboi_c_changed"]

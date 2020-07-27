@@ -1,6 +1,7 @@
 shader_type canvas_item;
 
 uniform int num_iter=30;
+uniform int pwr = 2;
 uniform vec2 c=vec2(-.8,.25);
 uniform float scale = 3.0;
 //uniform vec4 col1 = vec4(1.,0.7,.7,1.);
@@ -15,6 +16,15 @@ vec2 squared(vec2 vec){
 	return vec2(vec.x*vec.x -vec.y*vec.y, 2.0*vec.x*vec.y);
 }
 
+
+vec2 mypow(vec2 vec, int power){
+	vec2 dummy = vec;
+	for(int i=0;i<power - 1;i++){
+		dummy = vec2(dummy.x * vec.x - dummy.y * vec.y,   dummy.x * vec.y + dummy.y * vec.x);
+	}
+	return dummy;
+}
+
 float modulus(vec2 vec){
 	return sqrt(vec.x*vec.x + vec.y*vec.y);
 }
@@ -25,7 +35,7 @@ void fragment() {
 	float intensity = 1.0;
 
 	for(int i=0;i<num_iter;i++){
-		z = squared(squared(z))+ c;
+		z = mypow(z,pwr)+ c;
 		if(modulus(z)>=2.0){
 			intensity = float(i) / float(num_iter);
 			//COLOR.g = float(i) / float(num_iter);

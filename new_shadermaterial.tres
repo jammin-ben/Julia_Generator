@@ -5,6 +5,7 @@
 [resource]
 shader = ExtResource( 1 )
 shader_param/num_iter = 30
+shader_param/pwr = 2
 shader_param/c = Vector2( -0.8, 0.25 )
 shader_param/scale = 3.0
 shader_param/col2 = Plane( 0, 0, 0.1, 1 )
